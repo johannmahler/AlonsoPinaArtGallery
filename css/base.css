@@ -1,0 +1,39 @@
+/* =========================================================
+   ArtgalleryV1 – Grundlegende Styles
+   Zweck:
+   Globale Schrift, Farben und grundlegendes Verhalten
+   der gesamten Webseite.
+   ========================================================= */
+
+body {
+    background: var(--color-background);
+    color: var(--color-text);
+    font-family: var(--font-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+p {
+    margin: 0;
+}
+
+h1,
+h2,
+h3 {
+    line-height: 1.1;
+}
+
+p {
+    color: var(--color-text-muted);
+}
+
+a {
+    transition: color var(--transition);
+}
+
+a:hover {
+    color: var(--color-text-muted);
+}

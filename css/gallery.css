@@ -1,0 +1,404 @@
+/* =========================================================
+   ArtgalleryV1 – Galerie
+   Zweck:
+   Layout, Darstellung und Empty-State der Galerie.
+   ========================================================= */
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-md);
+}
+
+/* =========================================================
+   ArtgalleryV1 – Artwork Card
+   Zweck:
+   Aktiviert die 3D-Perspektive für die Flipcard.
+   ========================================================= */
+
+.artwork-card {
+    position: relative;
+    cursor: pointer;
+    perspective: 1400px;
+    border: 1px solid var(--color-border);
+    background: transparent;
+    transition: transform var(--transition);
+}
+
+.artwork-card:hover {
+    transform: translateY(-4px);
+}
+
+.artwork-card:focus-visible {
+    outline: 2px solid var(--color-text);
+    outline-offset: 6px;
+}
+
+/* =========================================================
+   ArtgalleryV1 – Flipcard-Innenbereich
+   Zweck:
+   Die innere Ebene übernimmt die 3D-Drehung.
+   ========================================================= */
+
+.artwork-card-inner {
+    position: relative;
+    display: grid;
+    width: 100%;
+    transform-style: preserve-3d;
+    transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* =========================================================
+   ArtgalleryV1 – Flipcard-Drehung
+   Zweck:
+   Die Karte dreht sich bei Hover oder Tastaturfokus.
+   ========================================================= */
+
+.artwork-card:hover .artwork-card-inner,
+.artwork-card:focus-visible .artwork-card-inner {
+    transform: rotateY(180deg);
+}
+
+/* =========================================================
+   ArtgalleryV1 – Vorderseite
+   Zweck:
+   Die Vorderseite bestimmt die Kartenhöhe.
+   ========================================================= */
+
+.artwork-card-front {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    grid-area: 1 / 1;
+    width: 100%;
+    min-width: 0;
+    background: var(--color-surface);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* =========================================================
+   ArtgalleryV1 – Rückseite
+   Zweck:
+   Die Rückseite liegt auf derselben Grid-Fläche
+   und wird um 180 Grad gedreht dargestellt.
+   ========================================================= */
+
+.artwork-card-back {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-area: 1 / 1;
+    width: 100%;
+    min-width: 0;
+    min-height: 100%;
+    overflow: hidden;
+    padding: var(--space-md);
+    background-color: var(--color-surface);
+    background-image:
+        linear-gradient(135deg,
+            rgba(255, 255, 255, 0.16),
+            rgba(255, 255, 255, 0.02)),
+        var(--artwork-background-image);
+    background-position: center;
+    background-size: cover;
+    transform: rotateY(180deg);
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* =========================================================
+   ArtgalleryV1 – Dunkle Rückseitenfläche
+   Zweck:
+   Verbessert die Lesbarkeit des Rückseitentextes.
+   ========================================================= */
+
+.artwork-card-back::before {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    content: "";
+    background:
+        linear-gradient(135deg,
+            rgba(0, 0, 0, 0.35),
+            rgba(0, 0, 0, 0.78));
+    pointer-events: none;
+}
+
+/* =========================================================
+   ArtgalleryV1 – Glanz-Effekt
+   Zweck:
+   Erzeugt eine dezente glänzende Fläche.
+   ========================================================= */
+
+.artwork-card-gloss {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+        linear-gradient(125deg,
+            rgba(255, 255, 255, 0.24),
+            transparent 35%,
+            transparent 65%,
+            rgba(255, 255, 255, 0.08));
+    pointer-events: none;
+}
+
+/* =========================================================
+   ArtgalleryV1 – Schwebender Rückseitentext
+   Zweck:
+   Der komplette Textblock schwebt deutlich vor
+   der Rückseite und wird beim Drehen eingeblendet.
+   ========================================================= */
+
+.artwork-card-back-content {
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    color: #ffffff;
+    text-align: center;
+    transform-style: preserve-3d;
+    transform: translateZ(120px) translateY(28px) scale(0.88);
+    opacity: 0;
+    transition:
+        transform 900ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 450ms ease;
+}
+
+/* =========================================================
+   ArtgalleryV1 – Sichtbarer 3D-Textblock
+   ========================================================= */
+
+.artwork-card:hover .artwork-card-back-content,
+.artwork-card:focus-visible .artwork-card-back-content {
+    transform: translateZ(170px) translateY(0) scale(1);
+    opacity: 1;
+}
+
+/* =========================================================
+   ArtgalleryV1 – Mehrere 3D-Textebenen
+   Zweck:
+   Jedes Element befindet sich auf einer eigenen
+   räumlichen Ebene vor dem Bild.
+   ========================================================= */
+
+/* Überschrift – vorderste Textebene */
+.artwork-card-back-content h3 {
+    position: relative;
+    z-index: 6;
+    margin: 0;
+    font-size: 1.35rem;
+    font-weight: 600;
+    transform: translateZ(75px) translateY(20px);
+    opacity: 0;
+    text-shadow:
+        0 2px 0 rgba(0, 0, 0, 0.45),
+        0 5px 12px rgba(0, 0, 0, 0.75);
+    transition:
+        transform 700ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 500ms ease;
+}
+
+/* Beschreibung – mittlere Textebene */
+.artwork-card-back-content p {
+    position: relative;
+    z-index: 4;
+    margin-top: var(--space-sm);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    transform: translateZ(48px) translateY(25px);
+    opacity: 0;
+    text-shadow:
+        0 2px 0 rgba(0, 0, 0, 0.45),
+        0 4px 10px rgba(0, 0, 0, 0.65);
+    transition:
+        transform 750ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 550ms ease;
+}
+
+/* Jahreszahl – eigene 3D-Ebene */
+.artwork-card-back-content .artwork-year {
+    position: relative;
+    z-index: 7;
+    display: block;
+    margin-top: var(--space-sm);
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.8rem;
+    transform: translateZ(95px) translateY(25px);
+    opacity: 0;
+    text-shadow:
+        0 2px 0 rgba(0, 0, 0, 0.5),
+        0 5px 14px rgba(0, 0, 0, 0.8);
+    transition:
+        transform 800ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 600ms ease;
+}
+
+/* Button – ganz vorderste Ebene */
+.artwork-card-back-content .artwork-details-button {
+    position: relative;
+    z-index: 8;
+    margin-top: var(--space-md);
+    transform: translateZ(125px) translateY(30px);
+    opacity: 0;
+    box-shadow:
+        0 7px 0 rgba(0, 0, 0, 0.3),
+        0 14px 26px rgba(0, 0, 0, 0.55);
+    transition:
+        transform 850ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 650ms ease,
+        background-color var(--transition),
+        color var(--transition),
+        box-shadow var(--transition);
+}
+
+/* =========================================================
+   ArtgalleryV1 – Textanimation beim Drehen
+   ========================================================= */
+
+.artwork-card:hover .artwork-card-back-content h3,
+.artwork-card:focus-visible .artwork-card-back-content h3 {
+    transform: translateZ(75px) translateY(0);
+    opacity: 1;
+}
+
+.artwork-card:hover .artwork-card-back-content p,
+.artwork-card:focus-visible .artwork-card-back-content p {
+    transform: translateZ(48px) translateY(0);
+    opacity: 1;
+    transition-delay: 100ms;
+}
+
+.artwork-card:hover .artwork-card-back-content .artwork-year,
+.artwork-card:focus-visible .artwork-card-back-content .artwork-year {
+    transform: translateZ(95px) translateY(0);
+    opacity: 1;
+    transition-delay: 180ms;
+}
+
+.artwork-card:hover .artwork-card-back-content .artwork-details-button,
+.artwork-card:focus-visible .artwork-card-back-content .artwork-details-button {
+    transform: translateZ(125px) translateY(0);
+    opacity: 1;
+    transition-delay: 260ms;
+}
+
+/* =========================================================
+   ArtgalleryV1 – Artwork Details Button
+   Zweck:
+   Öffnet die vorhandene Artwork-Detailansicht.
+   ========================================================= */
+
+.artwork-details-button {
+    padding: 0.65rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    background: transparent;
+    color: #ffffff;
+    cursor: pointer;
+    font: inherit;
+}
+
+.artwork-details-button:hover,
+.artwork-details-button:focus-visible {
+    background: #ffffff;
+    color: #000000;
+    box-shadow:
+        0 10px 0 rgba(0, 0, 0, 0.3),
+        0 20px 32px rgba(0, 0, 0, 0.65);
+}
+
+/* =========================================================
+   ArtgalleryV1 – Artwork-Bild
+   Zweck:
+   Einheitliches Seitenverhältnis und sanfter Bildzoom.
+   ========================================================= */
+
+.artwork-image {
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: var(--color-surface);
+}
+
+.artwork-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 700ms ease;
+}
+
+.artwork-card:hover .artwork-image img,
+.artwork-card:focus-visible .artwork-image img {
+    transform: scale(1.03);
+}
+
+/* =========================================================
+   ArtgalleryV1 – Artwork-Informationen
+   Zweck:
+   Zeigt die Grundinformationen auf der Vorderseite.
+   ========================================================= */
+
+.artwork-info {
+    padding: var(--space-sm);
+    border-top: 1px solid var(--color-text);
+}
+
+.artwork-info h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.artwork-info p {
+    margin-top: 0.25rem;
+    font-size: 0.9rem;
+}
+
+.artwork-info span {
+    display: block;
+    margin-top: 0.25rem;
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+}
+
+/* =========================================================
+   ArtgalleryV1 – Empty-State
+   Zweck:
+   Meldung, wenn keine Kunstwerke vorhanden sind.
+   ========================================================= */
+
+.gallery-empty {
+    grid-column: 1 / -1;
+    padding-block: var(--space-lg);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    text-align: center;
+}
+
+/* =========================================================
+   ArtgalleryV1 – Responsive Galerie
+   ========================================================= */
+
+@media (max-width: 900px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .artwork-card-back-content {
+        transform: translateZ(70px) translateY(20px) scale(0.94);
+    }
+
+    .artwork-card:hover .artwork-card-back-content,
+    .artwork-card:focus-visible .artwork-card-back-content {
+        transform: translateZ(95px) translateY(0) scale(1);
+    }
+}

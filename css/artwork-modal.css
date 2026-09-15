@@ -1,0 +1,129 @@
+/* =========================================================
+   ArtgalleryV1 – Artwork Modal
+   Zweck:
+   Darstellung und Verhalten der Großansicht eines
+   Kunstwerks auf Desktop, Tablet und Smartphone.
+   ========================================================= */
+
+.artwork-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: grid;
+    place-items: center;
+    padding: var(--space-md);
+    background: rgb(0 0 0 / 70%);
+}
+
+.artwork-modal[hidden] {
+    display: none;
+}
+
+.artwork-modal-content {
+    position: relative;
+    width: min(100%, 1000px);
+    max-height: 90vh;
+    overflow: auto;
+    padding: var(--space-md);
+    background: var(--color-surface);
+}
+
+.artwork-modal-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.75rem;
+    z-index: 2;
+    border: 0;
+    background: transparent;
+    color: var(--color-text);
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.artwork-modal-image img {
+    width: 100%;
+    max-height: 65vh;
+    object-fit: contain;
+}
+
+.artwork-modal-info {
+    padding-top: var(--space-md);
+}
+
+.artwork-modal-info h2 {
+    margin-bottom: var(--space-sm);
+    font-size: clamp(2rem, 5vw, 4rem);
+}
+
+.artwork-modal-info p:not(.eyebrow) {
+    margin-top: var(--space-sm);
+}
+
+.artwork-price {
+    color: var(--color-text) !important;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.artwork-status {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+
+/* Tablet */
+@media (max-width: 800px) {
+    .artwork-modal {
+        padding: var(--space-sm);
+    }
+
+    .artwork-modal-content {
+        max-height: 92vh;
+        padding: var(--space-sm);
+    }
+
+    .artwork-modal-image img {
+        max-height: 55vh;
+    }
+}
+
+/* Smartphone */
+@media (max-width: 550px) {
+    .artwork-modal {
+        padding: 0;
+    }
+
+    .artwork-modal-content {
+        width: 100%;
+        max-height: 100vh;
+        min-height: 100vh;
+        padding: var(--space-sm);
+    }
+
+    .artwork-modal-close {
+        top: 0.75rem;
+        right: 0.75rem;
+    }
+
+    .artwork-modal-image {
+        padding-top: 2rem;
+    }
+
+    .artwork-modal-image img {
+        max-height: 50vh;
+    }
+
+    .artwork-modal-info {
+        padding-top: var(--space-sm);
+    }
+
+    .artwork-modal-info h2 {
+        font-size: 2rem;
+    }
+}
