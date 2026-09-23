@@ -71,6 +71,7 @@
     padding: 0.85rem 1.5rem;
     border: 1px solid var(--color-text);
     color: var(--color-text);
+    cursor: pointer;
     transition:
         background var(--transition),
         color var(--transition);
@@ -102,4 +103,62 @@
 
 .site-footer p {
     font-size: 0.85rem;
+}
+
+/* =========================================================
+   ArtgalleryV1 – Contact Form
+   Zweck:
+   Einheitliche und responsive Gestaltung des Kontaktformulars.
+   ========================================================= */
+
+.contact-form {
+    display: grid;
+    gap: var(--space-md);
+    max-width: 650px;
+    margin-top: var(--space-lg);
+}
+
+.form-field {
+    display: grid;
+    gap: 0.45rem;
+}
+
+.form-field label {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.form-field input,
+.form-field textarea {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font: inherit;
+    transition:
+        border-color var(--transition),
+        box-shadow var(--transition);
+}
+
+.form-field textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+    color: var(--color-text-muted);
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+    border-color: var(--color-text);
+    outline: none;
+    box-shadow: 0 0 0 2px var(--color-border);
+}
+
+.contact-form .button {
+    justify-self: start;
+    cursor: pointer;
 }

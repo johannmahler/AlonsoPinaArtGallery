@@ -43,3 +43,34 @@
         min-height: 60vh;
     }
 }
+
+/* =========================================================
+   ArtgalleryV1 – Mobile Contact Form
+   Zweck:
+   Optimiert das Kontaktformular für Smartphones.
+   ========================================================= */
+
+@media (max-width: 550px) {
+    .contact-form {
+        width: 100%;
+        max-width: 100%;
+        gap: var(--space-sm);
+        margin-top: var(--space-md);
+    }
+
+    .form-field input,
+    .form-field textarea {
+        box-sizing: border-box;
+        padding: 0.75rem;
+        font-size: 1rem;
+    }
+
+    .form-field textarea {
+        min-height: 130px;
+    }
+
+    .contact-form .button {
+        width: 100%;
+        text-align: center;
+    }
+}

@@ -46,7 +46,7 @@ export const site = {
 
     about: {
         eyebrow: "The Artist",
-        title: "Alonso Pina Alvarez",
+        title: "Alonso Pina",
         text: "Alonso Pina creates expressive artworks that explore light, atmosphere, emotion and the relationship between color and space. His work combines personal impressions with a contemporary artistic approach, inviting viewers to discover their own meaning in every piece. AP Gallery presents a selection of original artworks created with passion, creativity and attention to detail."
     },
 

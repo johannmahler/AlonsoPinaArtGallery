@@ -7,22 +7,26 @@
 
 import { site } from "./data/site.js";
 import { artworks } from "./data/artworks.js";
+
 import {
     createArtworkModal,
     initArtworkModal
 } from "./components/artwork-modal.js";
+
 import { createHeader } from "./components/header.js";
 import { createFooter } from "./components/footer.js";
+
 import {
     createAboutSection,
     createContactSection
 } from "./components/content-sections.js";
+
 import { createHero } from "./components/hero.js";
 import { createGallery } from "./components/gallery.js";
 
 const app = document.querySelector("#app");
 
-/* Erzeugt einen absoluten Bildpfad vom Projekt-Stamm aus */
+/* Erzeugt den Bildpfad relativ zur index.html */
 function getArtworkImage(artwork) {
     return `/assets/images/artworks/${artwork.image}${site.artworkImageExtension}`;
 }
@@ -34,16 +38,12 @@ function render() {
 
         <main>
             ${createHero(site)}
-
             ${createGallery(site, artworks, getArtworkImage)}
-
             ${createAboutSection(site)}
-
             ${createContactSection(site)}
         </main>
 
         ${createArtworkModal()}
-
         ${createFooter(site)}
     `;
 }

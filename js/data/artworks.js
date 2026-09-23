@@ -25,7 +25,9 @@ export const artworks = [
         type: "Original",
         available: true,
         description:
-            "Silent Horizon explores the quiet relationship between space, colour and emotion. Soft transitions and expressive layers create a calm yet powerful atmosphere, inviting the viewer to pause and discover their own interpretation."
+            "Silent Horizon explores the quiet relationship between space, colour and emotion. Soft transitions and expressive layers create a calm yet powerful atmosphere, inviting the viewer to pause and discover their own interpretation.",
+        artisticStatement:
+            "Through abstract forms and subtle colour transitions, I explore the quiet moments between movement and stillness. My work invites viewers to connect with their own emotions and memories."
     },
     {
         id: 2,
@@ -41,7 +43,9 @@ export const artworks = [
         type: "Original",
         available: true,
         description:
-            "Golden Memory reflects on the lasting impressions of personal experiences. Warm tones and dynamic contrasts combine to create a contemporary composition filled with depth, movement and a sense of nostalgia."
+            "Golden Memory reflects on the lasting impressions of personal experiences. Warm tones and dynamic contrasts combine to create a contemporary composition filled with depth, movement and a sense of nostalgia.",
+        artisticStatement:
+            "I use warm colours and expressive contrasts to reflect on memory, emotion and the traces that personal experiences leave behind."
     },
     {
         id: 3,
@@ -57,6 +61,8 @@ export const artworks = [
         type: "Original",
         available: false,
         description:
-            "Beyond the Light explores the transition between shadow and illumination. Through layered materials, textures and contrasting elements, the work creates a visual journey that suggests hope, transformation and the unknown."
+            "Beyond the Light explores the transition between shadow and illumination. Through layered materials, textures and contrasting elements, the work creates a visual journey that suggests hope, transformation and the unknown.",
+        artisticStatement:
+            "This work reflects my interest in transformation, contrast and the relationship between darkness and light. Different materials create a sense of depth and continuous discovery."
     }
 ];

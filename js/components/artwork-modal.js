@@ -78,10 +78,12 @@ export function initArtworkModal(artworks, getArtworkImage) {
     </div>
     <div class="artwork-modal-info">
         <p class="eyebrow">${artwork.category}</p>
-        <p class="artwork-artist">Alonso Pina Alvarez</p>
+        <p class="artwork-artist">Alonso Pina</p>
         <h2 id="artwork-modal-title">${artwork.title}</h2>
-        <p>${artwork.description}</p>
-        <p>${artwork.technique} · ${artwork.size}</p>
+     <p class="artwork-statement">
+    ${artwork.artisticStatement}
+</p>
+<p>${artwork.technique} · ${artwork.size}</p>
         <p>${artwork.year} · ${artwork.type}</p>
         <p class="artwork-price">${formatPrice(artwork)}</p>
         ${availability}
@@ -96,7 +98,7 @@ export function initArtworkModal(artworks, getArtworkImage) {
         closeButton.focus();
     }
 
-    /* Schließt das Modal und gibt den Fokus an die Artwork-Karte zurück */
+    /* Schließt das Modal und gibt den Fokus an den zuvor verwendeten Details-Button zurück */
     function closeArtwork() {
         modal.hidden = true;
         document.body.classList.remove("modal-open");

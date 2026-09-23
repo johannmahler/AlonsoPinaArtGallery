@@ -22,6 +22,7 @@ export function createGallery(site, artworks, getArtworkImage) {
                     <p class="eyebrow">${site.gallery.eyebrow}</p>
                     <h2>${site.gallery.title}</h2>
                 </div>
+
                 <div class="gallery-grid">
                     ${content}
                 </div>
