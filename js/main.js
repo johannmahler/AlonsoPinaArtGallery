@@ -28,7 +28,7 @@ const app = document.querySelector("#app");
 
 /* Erzeugt den Bildpfad relativ zur index.html */
 function getArtworkImage(artwork) {
-    return `/assets/images/artworks/${artwork.image}${site.artworkImageExtension}`;
+    return `assets/images/artworks/${artwork.image}${site.artworkImageExtension}`;
 }
 
 /* Erzeugt die vollständige Webseite */
